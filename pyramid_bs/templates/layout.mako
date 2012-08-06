@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="${request.static_url('pyramid_bs:static/bootstrap/css/bootstrap.min.css')}" type="text/css" charset="utf-8" />
         <link rel="stylesheet" href="${request.static_url('pyramid_bs:static/js/jquery/qtip2/jquery.qtip.min.css')}" type="text/css" charset="utf-8" />
         <link rel="stylesheet" href="${request.static_url('pyramid_bs:static/style.css')}" type="text/css" charset="utf-8" />
+        <!-- Bootstrap Dropdown menu JS -->
+        <script type="text/javascript" src="${request.static_url('pyramid_bs:static/bootstrap/js/bootstrap-dropdown.js')}"></script>
 
         <!-- try: load googleapis jquery -->
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
