@@ -39,6 +39,8 @@ def main(global_config, **settings):
 
     config.add_static_view('static', 'static', cache_max_age=3600)
 
+    config.add_route('request', '/request')
+
     config.add_route('index', '/')
     config.add_route('login', '/login')  # change to /obscure_name to hide login
     config.add_route('logout', '/logout')
