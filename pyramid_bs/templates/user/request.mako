@@ -1,5 +1,6 @@
 <%inherit file="layout.mako"/>
-<form id="user_form" action="" method="POST" class="form-horizontal" autocomplete="off">
+<%namespace name="form_utils" file="/form_utils.mako"/>
+<form id="request_form" action="" method="POST" class="form-horizontal" autocomplete="off">
     <input type="hidden" name="_csrf" value="${request.csrf_token}">
     <div class="row">
         <div class="span12">
@@ -12,11 +13,7 @@
                 <br/>
                 <h4>Please select the group you would like access too</h4>
                 <br/>
-                <select class="span2">
-                    <option>Admin</option>
-                    <option>Viewer</option>
-                    <option>Editor</option>
-                </select>
+                ${form_utils.field(form, 'request', class_="span2")}
                 <br/>
                 <em>Please submit your request below and an admin will look over it</em>
                 <br/>
