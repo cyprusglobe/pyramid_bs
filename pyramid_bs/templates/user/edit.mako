@@ -15,7 +15,6 @@
             ${form_utils.field(form, 'phone', class_="span4")}
             ${form_utils.field(form, 'email', class_="span4")}
 
-
             ${form_utils.check_field(form, 'secured')}
             ${form_utils.check_field(form, 'basic')}
         </div>

@@ -38,6 +38,7 @@ class RequestView(object):
     def _form(self):
         request = self.request
         formdata = request.GET if request.is_xhr else request.POST
+        print '-------------------------'
         return RequestForm(formdata, obj=self.user)
 
     @view_config(renderer='json', request_method="GET", xhr=True)
@@ -49,6 +50,7 @@ class RequestView(object):
     def get(self):
         return {
             'form': self.form(),
+            'user': self.user,
         }
 
     @view_config(renderer='/user/request.mako', request_method="POST")
@@ -56,7 +58,6 @@ class RequestView(object):
         form = self.form()
         response = None
         request = self.request
-
         print form.data
 
         # redirect the user if needed

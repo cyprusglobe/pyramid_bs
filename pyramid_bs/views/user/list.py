@@ -3,7 +3,6 @@ from pyramid.view import (
     view_defaults,
 )
 
-from pyramid.security import Authenticated
 
 from ...models.user import User
 

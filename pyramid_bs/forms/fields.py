@@ -28,4 +28,4 @@ securedField = BooleanField(u'Secured', [])
 
 basicField = BooleanField(u'Basic', [])
 
-requestField = SelectField('Permission', choices=[(u'viewer', u'Viewer'), (u'editor', u'Editor'), (u'admin', u'Admin')])
+requestField = SelectField('Permission', choices=[(u'editor', u'Editor'), (u'admin', u'Admin'), (u'sadmin', u'Super Admin')])
