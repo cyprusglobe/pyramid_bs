@@ -1,10 +1,10 @@
 from ..forms import AjaxForm
 
 from ..forms.fields import (
-    requestField,
+    groupField,
 )
 
 
 class RequestForm(AjaxForm):
     json_validators = []
-    request = requestField
+    group = groupField

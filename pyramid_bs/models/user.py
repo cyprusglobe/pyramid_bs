@@ -73,6 +73,12 @@ class User(Base):
         return unicode(crypt.encode(password))
 
     @classmethod
+    def by_permission(cls, permission):
+        return DBSession.query(cls).join(Group).filter(Group.name == permission).all()
+        
+
+
+    @classmethod
     def by_id(cls, id):
         return DBSession.query(cls).filter(cls.id == id).first()
 

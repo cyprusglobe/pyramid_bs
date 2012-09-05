@@ -25,7 +25,7 @@ log = logging.getLogger(__name__)
 
 
 @view_defaults(
-    route_name='request',
+    route_name='admin_list',
     permission='basic',
 )
 class RequestView(object):
@@ -46,14 +46,14 @@ class RequestView(object):
         form = self.form()
         return form.json_errors(self.user)
 
-    @view_config(renderer='/user/request.mako', request_method="GET")
+    @view_config(renderer='/admin/list.mako', request_method="GET")
     def get(self):
         return {
             'form': self.form(),
-            'user': self.user,
+            'admins': User.by_permission(u'secured'),
         }
 
-    @view_config(renderer='/user/request.mako', request_method="POST")
+    @view_config(renderer='/admin/list.mako', request_method="POST")
     def post(self):
         form = self.form()
         response = None
