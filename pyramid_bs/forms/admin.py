@@ -5,6 +5,6 @@ from ..forms.fields import (
 )
 
 
-class RequestForm(AjaxForm):
+class AdminForm(AjaxForm):
     json_validators = []
     group = groupField

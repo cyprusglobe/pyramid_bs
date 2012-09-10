@@ -12,7 +12,7 @@ from pyramid.view import (
 from sqlalchemy.exc import IntegrityError
 
 from ...forms.admin import (
-    RequestForm,
+    AdminForm,
 )
 
 from ...models.user import User
@@ -28,7 +28,7 @@ log = logging.getLogger(__name__)
     route_name='admin_list',
     permission='basic',
 )
-class RequestView(object):
+class AdminView(object):
     def __init__(self, request):
         self.form = functools.partial(self._form)
         self.user = User.by_id(request.matchdict.get('user_id', 0))
@@ -38,8 +38,7 @@ class RequestView(object):
     def _form(self):
         request = self.request
         formdata = request.GET if request.is_xhr else request.POST
-        print '-------------------------'
-        return RequestForm(formdata, obj=self.user)
+        return AdminForm(formdata, obj=self.user)
 
     @view_config(renderer='json', request_method="GET", xhr=True)
     def xhr(self):
