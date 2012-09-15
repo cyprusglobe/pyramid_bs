@@ -75,8 +75,6 @@ class User(Base):
     @classmethod
     def by_permission(cls, permission):
         return DBSession.query(cls).join(Group).filter(Group.name == permission).all()
-        
-
 
     @classmethod
     def by_id(cls, id):

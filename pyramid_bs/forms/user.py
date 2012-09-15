@@ -11,6 +11,7 @@ from ..forms.fields import (
     emailField,
     securedField,
     basicField,
+    groupField,
 )
 
 from ..models.user import User
@@ -32,6 +33,11 @@ def login_exists(field_data, edit_user):
             return (False, 'This user is available.')
         else:
             return (False, 'Note: You are changing the login', 'blue')
+
+
+class GroupForm(AjaxForm):
+    json_validaotrs = []
+    group = groupField
 
 
 class AddForm(AjaxForm):

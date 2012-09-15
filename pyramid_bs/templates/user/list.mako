@@ -1,5 +1,15 @@
 <%inherit file="layout.mako"/>
+<%namespace name="form_utils" file="/form_utils.mako"/>
 
+<div class="row pull-right">
+    <div class="span2"
+        <form id="group_form" action="" method="POST" class="form-horizontal" autocomplete="off">
+            <input type="hidden" name="_csrf" value="${request.csrf_token}">
+            ${form_utils.field(form, 'group', class_="span2")}
+            <button type="submit" class="btn btn-mini btn-success"><i class="icon-ok"></i> Submit</button>
+        </form>
+    </div>
+</div>
 <div class="row">
     <div class="span12">
         ${len(users)} results
@@ -38,3 +48,4 @@
         </table>
     </div>
 </div>
+${form_utils.ajax_form('group_form', ajax_fields=['group'])}
