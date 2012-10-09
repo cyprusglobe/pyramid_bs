@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W4C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html leng="en" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html leng="en">
     <head>
         <title>Pyramid BS</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
@@ -7,10 +7,9 @@
         <meta name="description" content="pyramid_bs" />
         <link rel="shortcut icon" href="${request.static_url('pyramid_bs:static/favicon.ico')}" />
         <link rel="stylesheet" href="${request.static_url('pyramid_bs:static/bootstrap/css/bootstrap.min.css')}" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="${request.static_url('pyramid_bs:static/bootstrap/css/bootstrap-responsive.css')}" type="text/css" charset="utf-8" />
         <link rel="stylesheet" href="${request.static_url('pyramid_bs:static/js/jquery/qtip2/jquery.qtip.min.css')}" type="text/css" charset="utf-8" />
         <link rel="stylesheet" href="${request.static_url('pyramid_bs:static/style.css')}" type="text/css" charset="utf-8" />
-        <!-- Bootstrap Dropdown menu JS -->
-        <script type="text/javascript" src="${request.static_url('pyramid_bs:static/bootstrap/js/bootstrap-dropdown.js')}"></script>
 
         <!-- try: load googleapis jquery -->
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -42,7 +41,7 @@
                             <br />
                             ${self.flash_messages()}
                         </div>
-                        <div class="span6">
+                        <div class="span12">
                             <div style="margin-bottom:15px;" class="pull-right btn-toolbar">
                                 %if request.userid:
                                     <div class="btn-group">
@@ -51,11 +50,8 @@
                                         %else:
                                             <a class="btn" href="${request.route_url('user_list')}"><i class="icon-user"></i><i class="icon-user"></i> Users</a>
                                         %endif
-                                    </div>
-
-                                    <div class="btn-group">
                                         <a class="btn btn-warning" href="${request.route_url('logout')}"><i class="icon-remove"></i> Logout</a>
-                                    </div
+                                    </div>
                                 %elif request.route_url('login') not in request.url:
                                     <div class="btn-group">
                                         <a class="btn btn-success pull-right" href="#loginModal" data-toggle="modal">Sign in <b class="caret"></b></a>
@@ -86,7 +82,7 @@
 <%def name="flash_messages()">
     %if request.error_messages:
         <div class="alert alert-error" data-alert="alert">
-            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             %if len(request.error_messages) > 1:
                 <ul>
                     %for msg in request.error_messages:
@@ -118,7 +114,7 @@
 <%def name="confrim_delete(question)">
     <div id="confirm-modal" class="modal hide fade">
         <div class="modal-header">
-            <a href="#" class="close">&times;</a>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h3>Confirm Delete</h3>
         </div>
 

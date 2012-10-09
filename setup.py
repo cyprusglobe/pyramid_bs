@@ -17,6 +17,7 @@ requires = [
     'WTForms',
     'cryptacular',
     'mysql-python',
+    'webhelpers',
     ]
 
 setup(name='pyramid_bs',

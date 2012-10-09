@@ -2,8 +2,6 @@ import transaction
 
 from pyramid.httpexceptions import HTTPFound
 
-from pyramid.security import Authenticated
-
 from pyramid.view import (
     view_config,
     view_defaults,

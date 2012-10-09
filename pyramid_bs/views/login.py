@@ -7,7 +7,6 @@ from pyramid.security import remember
 from pyramid.view import (
     view_config,
     view_defaults,
-    forbidden_view_config,
 )
 
 from ..forms.login import LoginForm

@@ -20,13 +20,13 @@ def main(global_config, **settings):
 
     my_session_factory = UnencryptedCookieSessionFactoryConfig('itsaseekreet')
 
-    authentication_policy = AuthTktAuthenticationPolicy('seekrit', callback=groupfinder)
+    authentication_policy = AuthTktAuthenticationPolicy('seekrit',
+                                                        callback=groupfinder)
     authorization_policy = ACLAuthorizationPolicy()
 
     config = Configurator(settings=settings,
                           session_factory=my_session_factory,
-                          root_factory='.models.RootFactory'
-                         )
+                          root_factory='.models.RootFactory')
 
     config.set_default_permission(DENY_ALL)
     config.set_authentication_policy(authentication_policy)
@@ -42,11 +42,12 @@ def main(global_config, **settings):
     config.add_route('request', '/request')
 
     config.add_route('index', '/')
-    config.add_route('login', '/login')  # change to /obscure_name to hide login
+    config.add_route('login', '/login')  # change obscure to hide login
     config.add_route('logout', '/logout')
 
     config.add_route('user_list', '/users')
-    config.add_route('user_edit', '/user/{user_id}')
+    config.add_route('user_view', '/user/{user_id}')
+    config.add_route('user_edit', '/user/edit/{user_id}')
     config.add_route('user_delete', '/user/{user_id}/delete')
 
     config.scan()

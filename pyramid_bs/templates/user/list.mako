@@ -1,32 +1,27 @@
 <%inherit file="layout.mako"/>
 <%namespace name="form_utils" file="/form_utils.mako"/>
 
-<div class="row pull-right">
-    <div class="span2"
-        <form id="group_form" action="" method="POST" class="form-horizontal" autocomplete="off">
-            <input type="hidden" name="_csrf" value="${request.csrf_token}">
-            ${form_utils.field(form, 'group', class_="span2")}
-            <button type="submit" class="btn btn-mini btn-success"><i class="icon-ok"></i> Submit</button>
-        </form>
-    </div>
-</div>
 <div class="row">
     <div class="span12">
         ${len(users)} results
-        <table class="table table-striped table-bordered table-condensed">
+        <table class="table table-striped table-bordered">
             <thead>
-                <th>Login</th>
-                <th>First_Name</th>
-                <th>Last Name</th>
-                <th>Phone</th>
-                <th>Email</th>
+                <tr>
+                    <th>Login</th>
+                    <th>First_Name</th>
+                    <th>Last Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Groups</th>
+                </tr>
             </thead>
             %for user in users:
                 <tbody>
                     <tr>
                         <td>
-                            <a href="${request.route_url('user_edit', user_id=user.id)}">${user.login}</a>
-                            <a class="pull-right" data-target="#confirm-modal" data-toggle="modal" href="javascript:;"
+                            ${user.login}
+                            <a class="" href="${request.route_url('user_edit', user_id=user.id)}"><i class="icon-edit"></i></a>
+                            <a class="" data-target="#confirm-modal" data-toggle="modal" href="javascript:;"
                                 onclick="$('#confirm-modal #delete').attr('href', '/user/' + ${user.id} + '/delete');"><i class="icon-trash"></i></a>
                         </td>
                         <td>${user.first_name}</td>
@@ -48,4 +43,6 @@
         </table>
     </div>
 </div>
-${form_utils.ajax_form('group_form', ajax_fields=['group'])}
+<!--
+${form_utils.ajax_form('group_form')}
+-->
