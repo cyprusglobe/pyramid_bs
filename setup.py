@@ -18,6 +18,7 @@ requires = [
     'cryptacular',
     'mysql-python',
     'webhelpers',
+    'pyGravatar',
     ]
 
 setup(name='pyramid_bs',
