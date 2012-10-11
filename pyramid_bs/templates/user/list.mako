@@ -4,31 +4,18 @@
 <div class="row">
     <div class="span12">
         ${len(users)} results
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Login</th>
-                    <th>First_Name</th>
-                    <th>Last Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Groups</th>
-                </tr>
-            </thead>
+        <div class="clearfix"></div>
+        <br/>
             %for user in users:
-                <tbody>
-                    <tr>
-                        <td>
-                            ${user.login}
+                <div class="span4">
+                    <div class="well well-small">
+                        <a href="${request.route_url('user_view', user_id=user.id)}">${user.first_name}, ${user.last_name}</a>
+                        <div class="pull-right">
                             <a class="" href="${request.route_url('user_edit', user_id=user.id)}"><i class="icon-edit"></i></a>
                             <a class="" data-target="#confirm-modal" data-toggle="modal" href="javascript:;"
                                 onclick="$('#confirm-modal #delete').attr('href', '/user/' + ${user.id} + '/delete');"><i class="icon-trash"></i></a>
-                        </td>
-                        <td>${user.first_name}</td>
-                        <td>${user.last_name}</td>
-                        <td>${user.phone}</td>
-                        <td>${user.email}</td>
-                        <td>
+                        </div>
+                        <br/>
                         %for group in user.mygroups:
                             %if group.name == 'secured':
                                 <span class="label label-important">${group.name}</span>
@@ -36,11 +23,9 @@
                                 <span class="label label-info">${group.name}</span>
                             %endif
                         %endfor
-                        </td>
-                    </tr>
-                </tbody>
+                    </div>
+                </div>
             %endfor
-        </table>
     </div>
 </div>
 <!--

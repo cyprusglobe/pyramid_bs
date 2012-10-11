@@ -28,7 +28,8 @@ class UserListView(object):
     @view_config(renderer='/user/list.mako', request_method="GET")
     def get(self):
         return {
-        'users': User.by_permission(u'secured'),
+        # 'users': User.by_permission(u'secured'),
+        'users': User.get_all(),
         }
 
     @view_config(renderer='/user/list.mako', request_method="POST")

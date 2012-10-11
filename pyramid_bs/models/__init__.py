@@ -1,7 +1,6 @@
 from pyramid.security import (
     Allow,
     Everyone,
-    ALL_PERMISSIONS,
 )
 
 from sqlalchemy.ext.declarative import declarative_base
@@ -22,6 +21,7 @@ class RootFactory(object):
     __acl__ = [
         (Allow, Everyone, 'everybody'),
         (Allow, 'basic', 'basic'),
+        (Allow, 'edit', 'edit'),
         (Allow, 'secured', ('basic', 'secured')),
     ]
 
