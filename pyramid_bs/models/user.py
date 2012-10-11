@@ -17,6 +17,8 @@ from . import (
     DBSession
 )
 
+from gravatar import Gravatar
+
 
 crypt = cryptacular.bcrypt.BCRYPTPasswordManager()
 
@@ -89,6 +91,11 @@ class User(Base):
         if query_only:
             return DBSession.query(cls).order_by(cls.login)
         return DBSession.query(cls).order_by(cls.login).all()
+
+    @classmethod
+    def gravatar(cls, email):
+        gravatar = Gravatar(email, secure=True, size=50).thumb
+        return gravatar
 
     @classmethod
     def check_password(cls, login, password):

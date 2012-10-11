@@ -21,9 +21,8 @@ class UserView(object):
 
     @view_config(renderer='/user/view.mako', request_method="GET")
     def get(self):
-        gravatar = Gravatar('kjones@lobo.net', secure=True, size=50).thumb
+        user = User.by_id(self.request.matchdict.get('user_id', 0))
 
         return {
-            'gravatar': gravatar,
             'user': User.by_id(self.request.matchdict.get('user_id', 0)),
         }

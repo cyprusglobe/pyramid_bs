@@ -8,7 +8,8 @@
         <br/>
             %for user in users:
                 <div class="span4">
-                    <div class="well well-small">
+                    <div class="well">
+                        <img src="${user.gravatar(user.email)}" alt="Gravatar" class="pull-left" style="padding-right: 10px;"/>
                         <a href="${request.route_url('user_view', user_id=user.id)}">${user.first_name}, ${user.last_name}</a>
                         <div class="pull-right">
                             <a class="" href="${request.route_url('user_edit', user_id=user.id)}"><i class="icon-edit"></i></a>

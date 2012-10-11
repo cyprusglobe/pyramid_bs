@@ -1,16 +1,12 @@
 import logging
-import functools
 from pyramid.view import (
     view_config,
     view_defaults,
 )
 
-from ...forms.user import (
-    GroupForm,
-)
+from gravatar import Gravatar
 
 from ...models.user import User
-from ...utils import memoized
 
 log = logging.getLogger(__name__)
 
@@ -24,19 +20,21 @@ class UserListView(object):
         self.user = User.by_id(request.matchdict.get('user_id', 0))
         self.request = request
 
-
     @view_config(renderer='/user/list.mako', request_method="GET")
     def get(self):
+        users = User.get_all()
+        for u in users:
+            u.gravatar(u.email)
+
         return {
-        # 'users': User.by_permission(u'secured'),
-        'users': User.get_all(),
+            # 'users': User.by_permission(u'secured'),
+            'users': User.get_all(),
         }
 
     @view_config(renderer='/user/list.mako', request_method="POST")
     def post(self):
         response = None
         request = self.request
-        print form.data
         print request
 
         # redirect the user if needed
