@@ -8,6 +8,8 @@ from gravatar import Gravatar
 
 from ...models.user import User
 
+from pyramid.security import Allow, authenticated_userid, Everyone
+
 log = logging.getLogger(__name__)
 
 
@@ -16,15 +18,17 @@ log = logging.getLogger(__name__)
     permission='basic',
 )
 class UserListView(object):
+    @property
+    def __acl__(self, userid):
+        return [
+            (Allow, 'sheldon1' 'basic'),
+        ]
     def __init__(self, request):
         self.user = User.by_id(request.matchdict.get('user_id', 0))
         self.request = request
 
     @view_config(renderer='/user/list.mako', request_method="GET")
     def get(self):
-        users = User.get_all()
-        for u in users:
-            u.gravatar(u.email)
 
         return {
             # 'users': User.by_permission(u'secured'),

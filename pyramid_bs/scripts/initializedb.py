@@ -51,3 +51,16 @@ def main(argv=sys.argv):
         user.mygroups.append(group1)
         DBSession.add(user)
         DBSession.flush()
+
+        user = User()
+        group1 = Group()
+        group1.name = u'basic'
+        user.login = u'sheldon1'
+        user.password = u'test123'
+        user.first_name = u'Sheldon'
+        user.last_name = u'Jones'
+        user.phone = u'505-263-5626'
+        user.email = u'sheldon@lobo.net'
+        user.mygroups.append(group1)
+        DBSession.add(user)
+        DBSession.flush()

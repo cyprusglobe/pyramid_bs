@@ -15,6 +15,8 @@ from ...forms.user import (
     AddForm,
 )
 
+from pyramid.security import Allow, Everyone
+
 from ...models.user import User
 from ...models.user import Group
 from ...utils import memoized
@@ -27,6 +29,12 @@ from ...models import DBSession
     permission='secured',
 )
 class UserEditView(object):
+    @property
+    def __acl__(self, userid):
+        return [
+            (Allow, self.request.userid, 'basic'),
+        ]
+
     def __init__(self, request):
         self.form = functools.partial(self._form)
         self.user = User.by_id(request.matchdict.get('user_id', 0))

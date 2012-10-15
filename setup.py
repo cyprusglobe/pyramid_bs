@@ -19,6 +19,7 @@ requires = [
     'mysql-python',
     'webhelpers',
     'pyGravatar',
+    'pyramid_beaker',
     ]
 
 setup(name='pyramid_bs',

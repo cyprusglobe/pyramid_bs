@@ -5,28 +5,36 @@ from pyramid.httpexceptions import HTTPForbidden
 from pyramid.security import DENY_ALL
 from pyramid.security import NO_PERMISSION_REQUIRED
 from pyramid.session import UnencryptedCookieSessionFactoryConfig
+from pyramid_beaker import session_factory_from_settings
+
 from sqlalchemy import engine_from_config
 
-from .models import DBSession
-
+from .models import (
+    DBSession,
+    UserFactory,
+    RootFactory,
+)
 from .models.user import groupfinder
 
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
-    engine = engine_from_config(settings, 'sqlalchemy.')
+    engine = engine_from_config(settings, prefix='sqlalchemy.')
     DBSession.configure(bind=engine)
 
-    my_session_factory = UnencryptedCookieSessionFactoryConfig('itsaseekreet')
+    # my_session_factory = UnencryptedCookieSessionFactoryConfig('itsaseekreet')
 
     authentication_policy = AuthTktAuthenticationPolicy('seekrit',
                                                         callback=groupfinder)
     authorization_policy = ACLAuthorizationPolicy()
 
-    config = Configurator(settings=settings,
-                          session_factory=my_session_factory,
-                          root_factory='.models.RootFactory')
+    session_factory = session_factory_from_settings(settings)
+    config = Configurator(
+        root_factory=RootFactory,
+        settings=settings
+    )
+    config.set_session_factory(session_factory)
 
     config.set_default_permission(DENY_ALL)
     config.set_authentication_policy(authentication_policy)
@@ -45,10 +53,10 @@ def main(global_config, **settings):
     config.add_route('login', '/login')  # change obscure to hide login
     config.add_route('logout', '/logout')
 
-    config.add_route('user_list', '/users')
-    config.add_route('user_view', '/user/{user_id}')
-    config.add_route('user_edit', '/user/edit/{user_id}')
-    config.add_route('user_delete', '/user/{user_id}/delete')
+    config.add_route('user_list', '/users', factory=UserFactory)
+    config.add_route('user_view', '/user/{user_id}', factory=UserFactory, traverse='/{user_id}')
+    config.add_route('user_edit', '/user/edit/{user_id}', factory=UserFactory, traverse='/{user_id}')
+    config.add_route('user_delete', '/user/{user_id}/delete', factory=UserFactory, traverse='/{user_id}')
 
     config.scan()
     return config.make_wsgi_app()

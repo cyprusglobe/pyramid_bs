@@ -4,8 +4,10 @@ from pyramid.view import (
     view_defaults,
 )
 
-from gravatar import Gravatar
-
+from pyramid.security import (
+    Allow,
+    Everyone,
+)
 from ...models.user import User
 
 log = logging.getLogger(__name__)
@@ -16,13 +18,16 @@ log = logging.getLogger(__name__)
     permission='basic',
 )
 class UserView(object):
+    @property
+    def __acl__(self):
+        return [
+            (Allow, Everyone, 'basic'),
+        ]
     def __init__(self, request):
         self.request = request
 
     @view_config(renderer='/user/view.mako', request_method="GET")
     def get(self):
-        user = User.by_id(self.request.matchdict.get('user_id', 0))
-
         return {
             'user': User.by_id(self.request.matchdict.get('user_id', 0)),
         }

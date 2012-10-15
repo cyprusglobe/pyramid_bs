@@ -3,10 +3,10 @@
 <div class="row">
     <div class="span12">
             <div class="well">
-                %if gravatar:
+                %if user.gravatar:
                 <div class="row">
                     <div class="span1">
-                        <img src="${gravatar}" alt="Gravatar" class="pull-left" style="margin:8px;"/>
+                        <img src="${user.gravatar(user.email)}" alt="Gravatar" class="pull-left" style="margin:8px;"/>
                     </div>
                     <div class="span3">
                         <p class="muted">${user.first_name}, ${user.last_name} <a class="" href="${request.route_url('user_edit', user_id=user.id)}"><i class="icon-edit"></i></a></p>

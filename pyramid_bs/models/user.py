@@ -83,6 +83,10 @@ class User(Base):
         return DBSession.query(cls).filter(cls.id == id).first()
 
     @classmethod
+    def by_name(cls, login):
+        return login
+
+    @classmethod
     def by_login(cls, login):
         return DBSession.query(cls).filter(cls.login == login).first()
 
@@ -95,7 +99,10 @@ class User(Base):
     @classmethod
     def gravatar(cls, email):
         gravatar = Gravatar(email, secure=True, size=50).thumb
-        return gravatar
+        if gravatar:
+            return gravatar
+        else:
+            print 'image not availible'
 
     @classmethod
     def check_password(cls, login, password):
