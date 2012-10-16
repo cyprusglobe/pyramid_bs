@@ -1,5 +1,0 @@
-syn keyword CTagsProperty show width source toggle backdrop
-syn keyword CTagsFunction QTip init updateContent unassignEvents sanitizeOptions convertNotation createButton Modal createTitle updateTitle log setWidget removeTitle Ajax updateButton assignEvents Tip calculateTip polyCoordinates BGIFrame scroll
-syn keyword CTagsMethod t b
-syn keyword CTagsClass Dropdown Alert c b n t
-
